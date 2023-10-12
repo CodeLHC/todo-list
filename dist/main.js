@@ -1,1 +1,1 @@
-console.log("hi Crawfs");
+(()=>{"use strict";console.log("hi Crawfs")})();
