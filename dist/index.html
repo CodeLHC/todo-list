@@ -7,6 +7,55 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <nav>
+      <ul>
+        <li>All My Tasks</li>
+        <li>Add a New List</li>
+      </ul>
+    </nav>
+    <div id="content">
+      <button id="newTask">Add a New Task</button>
+      <dialog id="dialog">
+        <form id="newTaskForm">
+          <label for="taskTitle">What needs to be done?</label><br />
+          <input type="text" id="tastTitle" /><br />
+
+          <label for="taskDescription">Add any extra details:</label><br />
+          <input type="text" id="taskDescription" /><br />
+
+          <label for="taskDate">Amount of Pages:</label><br />
+          <input type="text" id="taskDate" /><br />
+
+          <p>Priority:</p>
+          <input
+            type="radio"
+            id="highPriority"
+            name="taskPriority"
+            value="High"
+          />
+          <label for="highPriority">High</label><br />
+          <input
+            type="radio"
+            id="mediumPriority"
+            name="taskPriority"
+            value="Medium"
+          />
+          <label for="mediumPriority">Medium</label><br />
+          <input
+            type="radio"
+            id="lowPriority"
+            name="taskPriority"
+            value="Low"
+            checked
+          />
+          <label for="lowPriority">Low</label><br />
+          <div id="formButtons">
+            <input id="submitButton" type="submit" value="Submit" />
+            <button id="closeButton">Cancel</button>
+          </div>
+        </form>
+      </dialog>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>

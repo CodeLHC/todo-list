@@ -1,6 +1,8 @@
 import { Item } from "./itemClass";
 import { Project } from "./projectClass";
 
+// const listOfProjects = []
+
 console.log("hi Crawfs");
 
 const testItem = new Item(
