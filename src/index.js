@@ -1,11 +1,12 @@
-import { Item } from "./itemClass";
+import { Task } from "./taskClass";
 import { Project } from "./projectClass";
-
-// const listOfProjects = []
+import { domControllers } from "./domControllers";
+import { handlers } from "./handlers";
+//default
 
 console.log("hi Crawfs");
 
-const testItem = new Item(
+const testTask = new Task(
   "Test this",
   "test that its working desc",
   "5th OCT",
@@ -13,9 +14,6 @@ const testItem = new Item(
 );
 console.log(testItem);
 
-const testProject = new Project("testProject Name");
+//function that creates new project
 
-console.log(testProject);
-testProject.addItem(testItem);
-
-console.log(testProject.list);
+handlers.clickEvents();

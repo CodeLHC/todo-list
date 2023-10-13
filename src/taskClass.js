@@ -1,4 +1,4 @@
-class Item {
+class Task {
   constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
@@ -17,7 +17,7 @@ class Item {
   //functions
 }
 
-export { Item };
+export { Task };
 
 // 	- Title
 // 	- Description

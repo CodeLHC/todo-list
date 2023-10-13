@@ -10,20 +10,32 @@
     <nav>
       <ul>
         <li>All My Tasks</li>
-        <li>Add a New List</li>
       </ul>
+      <button id="newProject">Add new Project</button>
+      <dialog id="dialog">
+        <form id="newProjectForm">
+          <label for="projectName">Project Name</label><br />
+          <input type="text" id="ProjectName" /><br />
+
+          <div id="formButtons">
+            <input id="submitButton" type="submit" value="Submit" />
+            <button id="closeButton">Cancel</button>
+          </div>
+        </form>
+      </dialog>
     </nav>
+
     <div id="content">
       <button id="newTask">Add a New Task</button>
       <dialog id="dialog">
         <form id="newTaskForm">
           <label for="taskTitle">What needs to be done?</label><br />
-          <input type="text" id="tastTitle" /><br />
+          <input type="text" id="taskTitle" /><br />
 
           <label for="taskDescription">Add any extra details:</label><br />
           <input type="text" id="taskDescription" /><br />
 
-          <label for="taskDate">Amount of Pages:</label><br />
+          <label for="taskDate">Date Due:</label><br />
           <input type="text" id="taskDate" /><br />
 
           <p>Priority:</p>
