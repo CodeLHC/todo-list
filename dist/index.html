@@ -3,22 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ToDo List</title>
+    <title>ToDo Lists</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <nav>
-      <ul id="projectTabs">
-        <!-- <li>All My Tasks</li> -->
-      </ul>
-      <button id="newProject">Add new Project</button>
-      <dialog id="dialog">
+      <ul id="projectTabs"></ul>
+      <button id="newProject">Add New Project</button>
+      <dialog id="projectDialog">
         <form id="newProjectForm">
           <label for="projectName">Project Name</label><br />
-          <input type="text" id="ProjectName" /><br />
+          <input type="text" id="projectName" /><br />
 
           <div id="formButtons">
-            <input id="submitButton" type="submit" value="Submit" />
+            <input id="projectSubmit" type="submit" value="Create" />
             <button id="closeButton">Cancel</button>
           </div>
         </form>
