@@ -1,3 +1,7 @@
 li {
   list-style-type: none;
 }
+ul {
+  display: flex;
+  gap: 5px;
+}

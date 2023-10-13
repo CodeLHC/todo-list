@@ -1,5 +1,6 @@
 import { domControllers } from "./domControllers";
 import { listOfProjects, addProjectToList } from "./listOfProjects";
+import { findProjectIndex } from "./findArrayIndex";
 
 const handlers = (() => {
   function clickEvents() {
@@ -15,7 +16,7 @@ const handlers = (() => {
     projectSubmitButton.addEventListener("click", (e) => {
       const newProjectForm = document.getElementById("newProjectForm");
       addProjectToList(projectName.value);
-      domControllers.removeAllChildNodes(domControllers.projectTabs);
+      domControllers.removeAllChildNodes(domControllers.projectTabContainer);
       domControllers.updateNavTabs();
       newProjectForm.reset();
       projectDialog.close();
@@ -25,6 +26,15 @@ const handlers = (() => {
     // newTaskButton.addEventListener("click", () => {
     //   dialog.showModal();
     // });
+
+    const projectTabs = document.querySelectorAll(".projectTab");
+    projectTabs.forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        domControllers.removeAllChildNodes(domControllers.content);
+        const index = findProjectIndex(e.target.innerText, listOfProjects);
+        domControllers.showProjectList(listOfProjects[index].list);
+      });
+    });
   }
   return { clickEvents };
 })();

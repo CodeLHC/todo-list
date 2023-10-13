@@ -12,7 +12,7 @@ const testTask = new Task(
   "5th OCT",
   "high"
 );
-console.log(testTask);
+// console.log(testTask);
 
 //function that creates new project
 domControllers.updateNavTabs();

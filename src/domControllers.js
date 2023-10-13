@@ -1,8 +1,8 @@
-const contentBox = document.getElementById("content");
 import { listOfProjects } from "./listOfProjects";
 
 const domControllers = (() => {
-  const projectTabs = document.getElementById("projectTabs");
+  const content = document.getElementById("content");
+  const projectTabContainer = document.getElementById("projectTabs");
   const addNewTask = () => {};
 
   const updateNavTabs = () => {
@@ -14,13 +14,28 @@ const domControllers = (() => {
     }
   };
 
+  const showProjectList = (array) => {
+    array.forEach((task) => {
+      const newTask = document.createElement("div");
+      newTask.innerText = task;
+      content.appendChild(newTask);
+    });
+  };
+
   const removeAllChildNodes = (parent) => {
     while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
     }
   };
 
-  return { addNewTask, updateNavTabs, removeAllChildNodes, projectTabs };
+  return {
+    addNewTask,
+    updateNavTabs,
+    removeAllChildNodes,
+    projectTabContainer,
+    showProjectList,
+    content,
+  };
 })();
 
 export { domControllers };
