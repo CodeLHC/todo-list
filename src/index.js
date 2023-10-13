@@ -12,8 +12,8 @@ const testTask = new Task(
   "5th OCT",
   "high"
 );
-console.log(testItem);
+console.log(testTask);
 
 //function that creates new project
-
+domControllers.updateNavTabs();
 handlers.clickEvents();

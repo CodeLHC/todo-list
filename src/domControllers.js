@@ -5,10 +5,24 @@ import { listOfProjects } from "./listOfProjects";
 // show
 
 const domControllers = (() => {
-  const addNewTask = () => {
-    newTaskButton.addEventListener("click", () => {});
+  const addNewTask = () => {};
+  const updateNavTabs = () => {
+    const projectTabs = document.getElementById("projectTabs");
 
-    const updateNavTabs = () => {};
+    for (let i = 0; i < listOfProjects.length; i++) {
+      const projecti = document.createElement("li");
+      projecti.innerText = listOfProjects[i].name;
+      projectTabs.appendChild(projecti);
+    }
+
+    // listOfProjects.forEach((project) => {
+    //   projectTabs.appendChild(
+    //     (document.createElement("li").innerText = project)
+    //   );
+    // });
+
+    //for each item on the list of projects array
+    // make a new li item and populate with the string
   };
 
   return { addNewTask, updateNavTabs };
