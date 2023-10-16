@@ -1,4 +1,4 @@
-import { listOfProjects } from "./listOfProjects";
+import { projectsModule } from "./projectListFunctions";
 
 const domControllers = (() => {
   const content = document.getElementById("content");
@@ -6,7 +6,7 @@ const domControllers = (() => {
   const addNewTask = () => {};
 
   const updateNavTabs = () => {
-    for (let i = 0; i < listOfProjects.length; i++) {
+    for (let i = 0; i < projectsModule.getProjects.length; i++) {
       const projecti = document.createElement("li");
       projecti.classList.add("projectTab");
       projecti.innerText = listOfProjects[i].name;

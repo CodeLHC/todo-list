@@ -1,5 +1,5 @@
 import { domControllers } from "./domControllers";
-import { listOfProjects, addProjectToList } from "./listOfProjects";
+import { projectsModule } from "./projectListFunctions";
 import { findProjectIndex } from "./findArrayIndex";
 
 const handlers = (() => {
@@ -15,7 +15,7 @@ const handlers = (() => {
     const projectName = document.getElementById("projectName");
     projectSubmitButton.addEventListener("click", (e) => {
       const newProjectForm = document.getElementById("newProjectForm");
-      addProjectToList(projectName.value);
+      projectsModule.makeNewProject(projectName.value);
       domControllers.removeAllChildNodes(domControllers.projectTabContainer);
       domControllers.updateNavTabs();
       newProjectForm.reset();

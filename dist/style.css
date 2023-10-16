@@ -5,3 +5,8 @@ ul {
   display: flex;
   gap: 5px;
 }
+
+nav {
+  display: flex;
+  gap: 5px;
+}

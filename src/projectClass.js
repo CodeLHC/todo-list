@@ -1,19 +1,27 @@
 class Project {
   constructor(name) {
     this.name = name;
-    this.list = [];
+    this.list = ["hello " + name];
   }
 
   //functions
 
-  addItem(item) {
+  addTask(item) {
     this.list.push(item);
   }
+
+  removeTask() {}
 
   //   removeItem(itemToRemove) {
   //     const findItemIndex = this.list.findIndex(itemToRemove);
   //     const updatedShipArray = this.list.splice(findItemIndex, 1);
   //   }
+
+  // removeProject(projectToRemove) {
+  //   const projectIndex = findProjectIndex(projectToRemove, findProjectIndex);
+  //   listOfProjects.splice(projectIndex, 1);
+  //   // domControllers.removeAllChildNodes();
+  // }
 }
 
 export { Project };
