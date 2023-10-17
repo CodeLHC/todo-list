@@ -29,10 +29,28 @@ const handlers = (() => {
 
     const projectTabs = document.querySelectorAll(".projectTab");
     projectTabs.forEach((tab) => {
+      const listOfProjects = projectsModule.getProjects();
       tab.addEventListener("click", (e) => {
         domControllers.removeAllChildNodes(domControllers.content);
         const index = findProjectIndex(e.target.innerText, listOfProjects);
-        domControllers.showProjectList(listOfProjects[index].list);
+        domControllers.showProjectView(listOfProjects[index].list);
+        projectsModule.setActiveTab(listOfProjects[index].name);
+        // console.log(projectsModule.getActiveTab());
+      });
+    });
+
+    const deleteProjectButtons = document.querySelectorAll(
+      ".deleteProjectButton"
+    );
+    deleteProjectButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        console.log(e);
+        // console.log(projectsModule.getProjects());
+        // const activeTab = projectsModule.getActiveTab();
+        // console.log(projectsModule.getActiveTab());
+        // // domControllers.removeAllChildNodes(domControllers.content);
+        // projectsModule.removeProject(activeTab);
+        // console.log(projectsModule.getProjects());
       });
     });
   }

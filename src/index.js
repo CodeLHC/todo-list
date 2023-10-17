@@ -3,9 +3,6 @@ import { Project } from "./projectClass";
 import { domControllers } from "./domControllers";
 import { handlers } from "./handlers";
 import { projectsModule } from "./projectListFunctions";
-//default
-
-console.log("hi Crawfs");
 
 const testTask = new Task(
   "Test this",
@@ -13,17 +10,27 @@ const testTask = new Task(
   "5th OCT",
   "high"
 );
-console.log(testTask);
+// console.log(testTask);
 
-console.log(projectsModule.getProjects());
+// testTask.changePriority("low");
 
-projectsModule.makeNewProject("1");
+// console.log(testTask);
 
-console.log(projectsModule.getProjects());
+// console.log(new Date().toLocaleDateString("en-UK"));
 
-projectsModule.removeProject("1");
+// const project = new Project("test");
 
-console.log(projectsModule.getProjects());
+// console.log(project);
+
+// project.addTask("2");
+
+// project.addTask("3");
+
+// console.log(project);
+
+// project.removeTask("2");
+
+// console.log(project);
 
 //function that creates new project
 domControllers.updateNavTabs();

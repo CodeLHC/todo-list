@@ -6,12 +6,18 @@ class Task {
     this.priority = priority;
   }
 
-  isComplete() {
+  completesTask() {
     console.log("complete function ran");
   }
 
-  changePriority() {
-    console.log("priority function ran");
+  changePriority(priority) {
+    this.priority = priority;
+  }
+
+  addToProject() {}
+
+  changeDueDate(dueDate) {
+    this.dueDate = dueDate;
   }
 
   //functions

@@ -6,7 +6,8 @@ const domControllers = (() => {
   const addNewTask = () => {};
 
   const updateNavTabs = () => {
-    for (let i = 0; i < projectsModule.getProjects.length; i++) {
+    const listOfProjects = projectsModule.getProjects();
+    for (let i = 0; i < listOfProjects.length; i++) {
       const projecti = document.createElement("li");
       projecti.classList.add("projectTab");
       projecti.innerText = listOfProjects[i].name;
@@ -14,12 +15,16 @@ const domControllers = (() => {
     }
   };
 
-  const showProjectList = (array) => {
+  const showProjectView = (array) => {
     array.forEach((task) => {
       const newTask = document.createElement("div");
       newTask.innerText = task;
       content.appendChild(newTask);
     });
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.classList.add("deleteProjectButton");
+    deleteProjectButton.textContent = "Delete this project";
+    content.appendChild(deleteProjectButton);
   };
 
   const removeAllChildNodes = (parent) => {
@@ -33,7 +38,7 @@ const domControllers = (() => {
     updateNavTabs,
     removeAllChildNodes,
     projectTabContainer,
-    showProjectList,
+    showProjectView,
     content,
   };
 })();

@@ -1,27 +1,24 @@
 class Project {
   constructor(name) {
     this.name = name;
-    this.list = ["hello " + name];
+    this.list = ["task1 div", "task2 Div", name];
   }
 
   //functions
 
-  addTask(item) {
-    this.list.push(item);
+  addTask(task) {
+    this.list.push(task);
   }
 
-  removeTask() {}
-
-  //   removeItem(itemToRemove) {
-  //     const findItemIndex = this.list.findIndex(itemToRemove);
-  //     const updatedShipArray = this.list.splice(findItemIndex, 1);
-  //   }
-
-  // removeProject(projectToRemove) {
-  //   const projectIndex = findProjectIndex(projectToRemove, findProjectIndex);
-  //   listOfProjects.splice(projectIndex, 1);
-  //   // domControllers.removeAllChildNodes();
+  // removeTask(task) {
+  //   const taskToRemove = list.find((t) => t.name === task);
+  //   this.list = this.list.filter((t) => t !== taskToRemove);
   // }
+
+  //    const removeProject = (name) => {
+  //     const project = listOfProjects.find((p) => p.name === name);
+  //     listOfProjects = listOfProjects.filter((p) => project !== p);
+  //   };
 }
 
 export { Project };
