@@ -26,7 +26,8 @@ const handlers = (() => {
     // newTaskButton.addEventListener("click", () => {
     //   dialog.showModal();
     // });
-
+  }
+  const stupidNameForEventListeners = () => {
     const projectTabs = document.querySelectorAll(".projectTab");
     projectTabs.forEach((tab) => {
       const listOfProjects = projectsModule.getProjects();
@@ -35,26 +36,31 @@ const handlers = (() => {
         const index = findProjectIndex(e.target.innerText, listOfProjects);
         domControllers.showProjectView(listOfProjects[index].list);
         projectsModule.setActiveTab(listOfProjects[index].name);
+        console.log("hi on tab click", projectsModule.getActiveTab());
         // console.log(projectsModule.getActiveTab());
-      });
-    });
+        const deleteProjectButtons = document.querySelectorAll(
+          ".deleteProjectButton"
+        );
 
-    const deleteProjectButtons = document.querySelectorAll(
-      ".deleteProjectButton"
-    );
-    deleteProjectButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        console.log(e);
-        // console.log(projectsModule.getProjects());
-        // const activeTab = projectsModule.getActiveTab();
-        // console.log(projectsModule.getActiveTab());
-        // // domControllers.removeAllChildNodes(domControllers.content);
-        // projectsModule.removeProject(activeTab);
-        // console.log(projectsModule.getProjects());
+        deleteProjectButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const activeTab = projectsModule.getActiveTab();
+
+            domControllers.removeAllChildNodes(domControllers.content);
+            projectsModule.removeProject(activeTab);
+            domControllers.removeAllChildNodes(
+              domControllers.projectTabContainer
+            );
+            domControllers.updateNavTabs();
+            projectsModule.setActiveTab(listOfProjects[0].name);
+            console.log("active tab on delete:", projectsModule.getActiveTab());
+            domControllers.showProjectView(listOfProjects[index].list);
+          });
+        });
       });
     });
-  }
-  return { clickEvents };
+  };
+  return { clickEvents, stupidNameForEventListeners };
 })();
 
 export { handlers };

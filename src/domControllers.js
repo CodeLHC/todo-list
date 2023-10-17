@@ -1,8 +1,10 @@
 import { projectsModule } from "./projectListFunctions";
+import { handlers } from "./handlers";
 
 const domControllers = (() => {
   const content = document.getElementById("content");
   const projectTabContainer = document.getElementById("projectTabs");
+
   const addNewTask = () => {};
 
   const updateNavTabs = () => {
@@ -13,6 +15,7 @@ const domControllers = (() => {
       projecti.innerText = listOfProjects[i].name;
       projectTabs.appendChild(projecti);
     }
+    handlers.stupidNameForEventListeners();
   };
 
   const showProjectView = (array) => {
@@ -21,6 +24,7 @@ const domControllers = (() => {
       newTask.innerText = task;
       content.appendChild(newTask);
     });
+
     const deleteProjectButton = document.createElement("button");
     deleteProjectButton.classList.add("deleteProjectButton");
     deleteProjectButton.textContent = "Delete this project";
