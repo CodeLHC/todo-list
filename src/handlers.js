@@ -30,6 +30,7 @@ export const addDeleteProjectHandlers = () => {
 };
 
 const onTaskSubmit = (e) => {
+  const listOfProjects = projectsModule.getProjects();
   const activeTab = projectsModule.getActiveTab();
   const taskForm = document.getElementById("newTaskForm");
   const taskTitle = document.getElementById("taskTitle");
@@ -45,6 +46,15 @@ const onTaskSubmit = (e) => {
     getPriorityCheckedValue(),
     activeProject.list
   );
+  if (activeTab !== listOfProjects[0].name) {
+    addTaskToProjectArray(
+      taskTitle.value,
+      taskDate.value,
+      taskDescription.value,
+      getPriorityCheckedValue(),
+      listOfProjects[0].list
+    );
+  }
   taskForm.reset();
   newTaskDialog.close();
   domControllers.removeAllChildNodes(domControllers.content);
@@ -94,7 +104,6 @@ const handlers = (() => {
     const projectTabs = document.querySelectorAll(".projectTab");
 
     projectTabs.forEach((tab) => {
-      // const listOfProjects = projectsModule.getProjects();
       tab.addEventListener("click", (e) => {
         domControllers.removeAllChildNodes(domControllers.content);
         const project = projectsModule.getProjectByName(e.target.innerText);
