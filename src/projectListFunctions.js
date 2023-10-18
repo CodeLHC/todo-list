@@ -1,5 +1,5 @@
 import { Project } from "./projectClass";
-import { findProjectIndex } from "./findArrayIndex";
+import { findArrayIndex } from "./findArrayIndex";
 import { domControllers } from "./domControllers";
 
 const projectsModule = (() => {
@@ -26,12 +26,17 @@ const projectsModule = (() => {
     listOfProjects = listOfProjects.filter((p) => project !== p);
   };
 
+  const getProjectByName = (name) => {
+    return listOfProjects.find((p) => p.name === name);
+  };
+
   return {
     makeNewProject,
     removeProject,
     getProjects,
     setActiveTab,
     getActiveTab,
+    getProjectByName,
   };
 })();
 

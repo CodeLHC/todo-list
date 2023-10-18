@@ -34,4 +34,4 @@ const testTask = new Task(
 
 //function that creates new project
 domControllers.updateNavTabs();
-handlers.clickEvents();
+handlers.addNewProjectButtonHandlers();
