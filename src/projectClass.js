@@ -1,7 +1,7 @@
 class Project {
   constructor(name) {
     this.name = name;
-    this.list = ["task1 div", "task2 Div", name];
+    this.list = [];
   }
 
   //functions

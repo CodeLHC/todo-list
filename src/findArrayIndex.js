@@ -1,7 +1,7 @@
-const findProjectIndex = (projectName, array) => {
+const findArrayIndex = (projectName, array) => {
   return array.findIndex((project) => {
     return project.name === projectName;
   });
 };
 
-export { findProjectIndex };
+export { findArrayIndex };

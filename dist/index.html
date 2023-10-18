@@ -22,10 +22,8 @@
         </form>
       </dialog>
     </nav>
-
-    <div id="content">
-      <!-- <button id="newTask">Add a New Task</button> -->
-      <dialog id="dialog">
+    <div>
+      <dialog id="newForm">
         <form id="newTaskForm">
           <label for="taskTitle">What needs to be done?</label><br />
           <input type="text" id="taskTitle" /><br />
@@ -34,7 +32,7 @@
           <input type="text" id="taskDescription" /><br />
 
           <label for="taskDate">Date Due:</label><br />
-          <input type="text" id="taskDate" /><br />
+          <input type="date" id="taskDate" /><br />
 
           <p>Priority:</p>
           <input
@@ -60,12 +58,13 @@
           />
           <label for="lowPriority">Low</label><br />
           <div id="formButtons">
-            <input id="submitButton" type="submit" value="Submit" />
+            <input id="submitTaskButton" type="submit" value="Create" />
             <button id="closeButton">Cancel</button>
           </div>
         </form>
       </dialog>
     </div>
+    <div id="content"></div>
     <script src="main.js"></script>
   </body>
 </html>

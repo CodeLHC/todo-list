@@ -14,8 +14,6 @@ class Task {
     this.priority = priority;
   }
 
-  addToProject() {}
-
   changeDueDate(dueDate) {
     this.dueDate = dueDate;
   }

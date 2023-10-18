@@ -1,1 +1,156 @@
-(()=>{"use strict";class e{constructor(e){this.name=e,this.list=["task1 div","task2 Div",e]}addTask(e){this.list.push(e)}}const t=(()=>{let t=[new e("All my Tasks"),new e("same")],o="All my Tasks";return{makeNewProject:o=>{const n=new e(o);t.push(n)},removeProject:e=>{const o=t.find((t=>t.name===e));t=t.filter((e=>o!==e))},getProjects:()=>[...t],setActiveTab:e=>{o=e},getActiveTab:()=>o}})(),o=function(){const e=document.getElementById("projectDialog");document.getElementById("newProject").addEventListener("click",(()=>{e.showModal()}));const o=document.getElementById("projectSubmit"),n=document.getElementById("projectName");o.addEventListener("click",(o=>{const s=document.getElementById("newProjectForm");t.makeNewProject(n.value),c.removeAllChildNodes(c.projectTabContainer),c.updateNavTabs(),s.reset(),e.close(),o.preventDefault()}))},n=()=>{document.querySelectorAll(".projectTab").forEach((e=>{const o=t.getProjects();e.addEventListener("click",(e=>{c.removeAllChildNodes(c.content);const n=(s=e.target.innerText,o.findIndex((e=>e.name===s)));var s;c.showProjectView(o[n].list),t.setActiveTab(o[n].name),console.log("hi on tab click",t.getActiveTab()),document.querySelectorAll(".deleteProjectButton").forEach((e=>{e.addEventListener("click",(()=>{const e=t.getActiveTab();c.removeAllChildNodes(c.content),t.removeProject(e),c.removeAllChildNodes(c.projectTabContainer),c.updateNavTabs(),t.setActiveTab(o[0].name),console.log("active tab on delete:",t.getActiveTab()),c.showProjectView(o[n].list)}))}))}))}))},c=(()=>{const e=document.getElementById("content");return{addNewTask:()=>{},updateNavTabs:()=>{const e=t.getProjects();for(let t=0;t<e.length;t++){const o=document.createElement("li");o.classList.add("projectTab"),o.innerText=e[t].name,projectTabs.appendChild(o)}n()},removeAllChildNodes:e=>{for(;e.firstChild;)e.removeChild(e.firstChild)},projectTabContainer:document.getElementById("projectTabs"),showProjectView:t=>{t.forEach((t=>{const o=document.createElement("div");o.innerText=t,e.appendChild(o)}));const o=document.createElement("button");o.classList.add("deleteProjectButton"),o.textContent="Delete this project",e.appendChild(o)},content:e}})();new class{constructor(e,t,o,n){this.title=e,this.description=t,this.dueDate=o,this.priority=n}completesTask(){console.log("complete function ran")}changePriority(e){this.priority=e}addToProject(){}changeDueDate(e){this.dueDate=e}}("Test this","test that its working desc","5th OCT","high"),c.updateNavTabs(),o()})();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/domControllers.js":
+/*!*******************************!*\
+  !*** ./src/domControllers.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   domControllers: () => (/* binding */ domControllers)\n/* harmony export */ });\n/* harmony import */ var _projectListFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projectListFunctions */ \"./src/projectListFunctions.js\");\n/* harmony import */ var _handlers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./handlers */ \"./src/handlers.js\");\n\n\n\nconst domControllers = (() => {\n  const content = document.getElementById(\"content\");\n  const projectTabContainer = document.getElementById(\"projectTabs\");\n\n  const updateNavTabs = () => {\n    const listOfProjects = _projectListFunctions__WEBPACK_IMPORTED_MODULE_0__.projectsModule.getProjects();\n    for (let i = 0; i < listOfProjects.length; i++) {\n      const projecti = document.createElement(\"li\");\n      projecti.classList.add(\"projectTab\");\n      projecti.innerText = listOfProjects[i].name;\n      projectTabs.appendChild(projecti);\n    }\n\n    _handlers__WEBPACK_IMPORTED_MODULE_1__.handlers.stupidNameForEventListeners();\n  };\n\n  const showProjectView = (array) => {\n    array.forEach((task) => {\n      const newTask = document.createElement(\"div\");\n      newTask.innerText = `${task.title}\n      ${task.description}\n      ${task.dueDate}\n      ${task.priority}`;\n      content.appendChild(newTask);\n    });\n\n    const addNewTaskButton = document.createElement(\"button\");\n    addNewTaskButton.classList.add(\"newTaskButton\");\n    addNewTaskButton.textContent = \"Add a new task to this project\";\n    content.appendChild(addNewTaskButton);\n\n    const deleteProjectButton = document.createElement(\"button\");\n    deleteProjectButton.classList.add(\"deleteProjectButton\");\n    deleteProjectButton.textContent = \"Delete this project\";\n    content.appendChild(deleteProjectButton);\n    _handlers__WEBPACK_IMPORTED_MODULE_1__.handlers.stupidNameForEventListeners();\n  };\n\n  const removeAllChildNodes = (parent) => {\n    while (parent.firstChild) {\n      parent.removeChild(parent.firstChild);\n    }\n  };\n\n  return {\n    updateNavTabs,\n    removeAllChildNodes,\n    projectTabContainer,\n    showProjectView,\n    content,\n  };\n})();\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/domControllers.js?");
+
+/***/ }),
+
+/***/ "./src/findArrayIndex.js":
+/*!*******************************!*\
+  !*** ./src/findArrayIndex.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   findArrayIndex: () => (/* binding */ findArrayIndex)\n/* harmony export */ });\nconst findArrayIndex = (projectName, array) => {\n  return array.findIndex((project) => {\n    return project.name === projectName;\n  });\n};\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/findArrayIndex.js?");
+
+/***/ }),
+
+/***/ "./src/handlers.js":
+/*!*************************!*\
+  !*** ./src/handlers.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   handlers: () => (/* binding */ handlers)\n/* harmony export */ });\n/* harmony import */ var _domControllers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./domControllers */ \"./src/domControllers.js\");\n/* harmony import */ var _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectListFunctions */ \"./src/projectListFunctions.js\");\n/* harmony import */ var _findArrayIndex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./findArrayIndex */ \"./src/findArrayIndex.js\");\n/* harmony import */ var _taskFunctions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./taskFunctions */ \"./src/taskFunctions.js\");\n\n\n\n\n\nconst handlers = (() => {\n  function clickEvents() {\n    const projectDialog = document.getElementById(\"projectDialog\");\n\n    const newProjectButton = document.getElementById(\"newProject\");\n    newProjectButton.addEventListener(\"click\", () => {\n      projectDialog.showModal();\n    });\n\n    const projectSubmitButton = document.getElementById(\"projectSubmit\");\n    const projectName = document.getElementById(\"projectName\");\n    projectSubmitButton.addEventListener(\"click\", (e) => {\n      const newProjectForm = document.getElementById(\"newProjectForm\");\n      _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.makeNewProject(projectName.value);\n      _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.removeAllChildNodes(_domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.projectTabContainer);\n      _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.updateNavTabs();\n      newProjectForm.reset();\n      projectDialog.close();\n      e.preventDefault();\n    });\n  }\n  const stupidNameForEventListeners = () => {\n    const projectTabs = document.querySelectorAll(\".projectTab\");\n    projectTabs.forEach((tab) => {\n      const listOfProjects = _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.getProjects();\n      tab.addEventListener(\"click\", (e) => {\n        _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.removeAllChildNodes(_domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.content);\n        const index = (0,_findArrayIndex__WEBPACK_IMPORTED_MODULE_2__.findArrayIndex)(e.target.innerText, listOfProjects);\n        _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.showProjectView(listOfProjects[index].list);\n        _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.setActiveTab(listOfProjects[index].name);\n        console.log(\"hi on tab click\", _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.getActiveTab());\n\n        const deleteProjectButtons = document.querySelectorAll(\n          \".deleteProjectButton\"\n        );\n        const activeTab = _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.getActiveTab();\n\n        deleteProjectButtons.forEach((button) => {\n          button.addEventListener(\"click\", () => {\n            _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.removeAllChildNodes(_domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.content);\n            _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.removeProject(activeTab);\n            _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.removeAllChildNodes(\n              _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.projectTabContainer\n            );\n            _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.updateNavTabs();\n            _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.setActiveTab(listOfProjects[0].name);\n            console.log(\"active tab on delete:\", _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.getActiveTab());\n            _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.showProjectView(listOfProjects[index].list);\n          });\n        });\n\n        const newTaskButtons = document.querySelectorAll(\".newTaskButton\");\n        const newTaskDialog = document.getElementById(\"newForm\");\n        const taskForm = document.getElementById(\"newTaskForm\");\n        newTaskButtons.forEach((button) => {\n          button.addEventListener(\"click\", () => {\n            newTaskDialog.showModal();\n          });\n        });\n\n        const submitTask = document.getElementById(\"submitTaskButton\");\n        const taskTitle = document.getElementById(\"taskTitle\");\n        const taskDescription = document.getElementById(\"taskDescription\");\n        const taskDate = document.getElementById(\"taskDate\");\n\n        submitTask.addEventListener(\"click\", (e) => {\n          e.preventDefault();\n          const iOfActiveTab = (0,_findArrayIndex__WEBPACK_IMPORTED_MODULE_2__.findArrayIndex)(\n            _projectListFunctions__WEBPACK_IMPORTED_MODULE_1__.projectsModule.getActiveTab(),\n            listOfProjects\n          );\n          console.log(listOfProjects[iOfActiveTab].list);\n          (0,_taskFunctions__WEBPACK_IMPORTED_MODULE_3__.addTaskToProjectArray)(\n            taskTitle.value,\n            taskDate.value,\n            taskDescription.value,\n            (0,_taskFunctions__WEBPACK_IMPORTED_MODULE_3__.getPriorityCheckedValue)(),\n            listOfProjects[iOfActiveTab].list\n          );\n\n          taskForm.reset();\n          newTaskDialog.close();\n          _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.removeAllChildNodes(_domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.content);\n          _domControllers__WEBPACK_IMPORTED_MODULE_0__.domControllers.showProjectView(listOfProjects[iOfActiveTab].list);\n        });\n      });\n    });\n  };\n  return { clickEvents, stupidNameForEventListeners };\n})();\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/handlers.js?");
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _taskClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./taskClass */ \"./src/taskClass.js\");\n/* harmony import */ var _projectClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectClass */ \"./src/projectClass.js\");\n/* harmony import */ var _domControllers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./domControllers */ \"./src/domControllers.js\");\n/* harmony import */ var _handlers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./handlers */ \"./src/handlers.js\");\n/* harmony import */ var _projectListFunctions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./projectListFunctions */ \"./src/projectListFunctions.js\");\n\n\n\n\n\n\nconst testTask = new _taskClass__WEBPACK_IMPORTED_MODULE_0__.Task(\n  \"Test this\",\n  \"test that its working desc\",\n  \"5th OCT\",\n  \"high\"\n);\n// console.log(testTask);\n\n// testTask.changePriority(\"low\");\n\n// console.log(testTask);\n\n// console.log(new Date().toLocaleDateString(\"en-UK\"));\n\n// const project = new Project(\"test\");\n\n// console.log(project);\n\n// project.addTask(\"2\");\n\n// project.addTask(\"3\");\n\n// console.log(project);\n\n// project.removeTask(\"2\");\n\n// console.log(project);\n\n//function that creates new project\n_domControllers__WEBPACK_IMPORTED_MODULE_2__.domControllers.updateNavTabs();\n_handlers__WEBPACK_IMPORTED_MODULE_3__.handlers.clickEvents();\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/projectClass.js":
+/*!*****************************!*\
+  !*** ./src/projectClass.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Project: () => (/* binding */ Project)\n/* harmony export */ });\nclass Project {\n  constructor(name) {\n    this.name = name;\n    this.list = [];\n  }\n\n  //functions\n\n  addTask(task) {\n    this.list.push(task);\n  }\n\n  // removeTask(task) {\n  //   const taskToRemove = list.find((t) => t.name === task);\n  //   this.list = this.list.filter((t) => t !== taskToRemove);\n  // }\n\n  //    const removeProject = (name) => {\n  //     const project = listOfProjects.find((p) => p.name === name);\n  //     listOfProjects = listOfProjects.filter((p) => project !== p);\n  //   };\n}\n\n\n\n// \t- Name\n// Empty project array to push items to?\n\n// iife function to add project to list of projects to choose from on initialization?\n\n\n//# sourceURL=webpack://todo-list/./src/projectClass.js?");
+
+/***/ }),
+
+/***/ "./src/projectListFunctions.js":
+/*!*************************************!*\
+  !*** ./src/projectListFunctions.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   projectsModule: () => (/* binding */ projectsModule)\n/* harmony export */ });\n/* harmony import */ var _projectClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projectClass */ \"./src/projectClass.js\");\n/* harmony import */ var _findArrayIndex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./findArrayIndex */ \"./src/findArrayIndex.js\");\n/* harmony import */ var _domControllers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./domControllers */ \"./src/domControllers.js\");\n\n\n\n\nconst projectsModule = (() => {\n  let listOfProjects = [new _projectClass__WEBPACK_IMPORTED_MODULE_0__.Project(\"All my Tasks\"), new _projectClass__WEBPACK_IMPORTED_MODULE_0__.Project(\"same\")];\n  let activeTab = \"All my Tasks\";\n\n  const makeNewProject = (name) => {\n    const project = new _projectClass__WEBPACK_IMPORTED_MODULE_0__.Project(name);\n    listOfProjects.push(project);\n  };\n\n  const getProjects = () => [...listOfProjects];\n\n  const getActiveTab = () => {\n    return activeTab;\n  };\n\n  const setActiveTab = (tabName) => {\n    activeTab = tabName;\n  };\n\n  const removeProject = (name) => {\n    const project = listOfProjects.find((p) => p.name === name);\n    listOfProjects = listOfProjects.filter((p) => project !== p);\n  };\n\n  return {\n    makeNewProject,\n    removeProject,\n    getProjects,\n    setActiveTab,\n    getActiveTab,\n  };\n})();\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/projectListFunctions.js?");
+
+/***/ }),
+
+/***/ "./src/taskClass.js":
+/*!**************************!*\
+  !*** ./src/taskClass.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Task: () => (/* binding */ Task)\n/* harmony export */ });\nclass Task {\n  constructor(title, description, dueDate, priority) {\n    this.title = title;\n    this.description = description;\n    this.dueDate = dueDate;\n    this.priority = priority;\n  }\n\n  completesTask() {\n    console.log(\"complete function ran\");\n  }\n\n  changePriority(priority) {\n    this.priority = priority;\n  }\n\n  changeDueDate(dueDate) {\n    this.dueDate = dueDate;\n  }\n\n  //functions\n}\n\n\n\n// \t- Title\n// \t- Description\n// \t- dueDate\n// \t- Priority\n// \t- Notes\n// \t- Checklist?\n// What project?\n\n//make new todo\n// set as complete\n//change priority\n\n\n//# sourceURL=webpack://todo-list/./src/taskClass.js?");
+
+/***/ }),
+
+/***/ "./src/taskFunctions.js":
+/*!******************************!*\
+  !*** ./src/taskFunctions.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   addTaskToProjectArray: () => (/* binding */ addTaskToProjectArray),\n/* harmony export */   getPriorityCheckedValue: () => (/* binding */ getPriorityCheckedValue)\n/* harmony export */ });\n/* harmony import */ var _taskClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./taskClass */ \"./src/taskClass.js\");\n\n\nfunction getPriorityCheckedValue() {\n  const taskPriority = document.getElementsByName(\"taskPriority\");\n  const checkedValue = Array.from(taskPriority).find((radio) => radio.checked);\n  return checkedValue.value;\n}\n\nfunction addTaskToProjectArray(title, desc, dueDate, priority, listArray) {\n  const task = new _taskClass__WEBPACK_IMPORTED_MODULE_0__.Task(title, desc, dueDate, priority);\n  listArray.push(task);\n}\n\n\n\n\n//# sourceURL=webpack://todo-list/./src/taskFunctions.js?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	
+/******/ })()
+;
