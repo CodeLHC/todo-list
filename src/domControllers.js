@@ -1,5 +1,10 @@
 import { projectsModule } from "./projectListFunctions";
-import { handlers } from "./handlers";
+import {
+  handlers,
+  addDeleteProjectHandlers,
+  addTaskToProjectListHandlers,
+  showNewTaskForm,
+} from "./handlers";
 
 const domControllers = (() => {
   const content = document.getElementById("content");
@@ -25,18 +30,21 @@ const domControllers = (() => {
       ${task.dueDate}
       ${task.priority}`;
       content.appendChild(newTask);
+      addTaskToProjectListHandlers();
+      // addDeleteProjectHandlers();
     });
 
     const addNewTaskButton = document.createElement("button");
     addNewTaskButton.classList.add("newTaskButton");
     addNewTaskButton.textContent = "Add a new task to this project";
     content.appendChild(addNewTaskButton);
+    showNewTaskForm();
 
     const deleteProjectButton = document.createElement("button");
     deleteProjectButton.classList.add("deleteProjectButton");
     deleteProjectButton.textContent = "Delete this project";
     content.appendChild(deleteProjectButton);
-    handlers.stupidNameForEventListeners();
+    addDeleteProjectHandlers();
   };
 
   const removeAllChildNodes = (parent) => {

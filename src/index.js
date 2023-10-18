@@ -34,4 +34,8 @@ const testTask = new Task(
 
 //function that creates new project
 domControllers.updateNavTabs();
+const activeTab = projectsModule.getActiveTab();
+const activeProject = projectsModule.getProjectByName(activeTab);
+domControllers.showProjectView(activeProject.list);
+
 handlers.addNewProjectButtonHandlers();

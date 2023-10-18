@@ -6,54 +6,64 @@ import {
   addTaskToProjectArray,
 } from "./taskFunctions";
 
-const addDeleteProjectButtonHandlers = (project, array) => {
+const onProjectDelete = () => {
+  domControllers.removeAllChildNodes(domControllers.content);
+
+  const activeTab = projectsModule.getActiveTab();
+  projectsModule.removeProject(activeTab);
+
+  domControllers.removeAllChildNodes(domControllers.projectTabContainer);
+
+  domControllers.updateNavTabs();
+
+  projectsModule.setActiveTab(projectsModule.getProjects()[0].name);
+  domControllers.showProjectView(projectsModule.getProjects()[0].list);
+};
+
+export const addDeleteProjectHandlers = () => {
   const deleteProjectButtons = document.querySelectorAll(
     ".deleteProjectButton"
   );
-  const activeTab = projectsModule.getActiveTab();
-
   deleteProjectButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      domControllers.removeAllChildNodes(domControllers.content);
-      projectsModule.removeProject(activeTab);
-      domControllers.removeAllChildNodes(domControllers.projectTabContainer);
-      domControllers.updateNavTabs();
-      projectsModule.setActiveTab(array[0].name);
-      domControllers.showProjectView(project.list);
-    });
+    button.addEventListener("click", onProjectDelete);
   });
 };
 
-const addNewTaskEventHandlers = (array) => {
+const onTaskSubmit = (e) => {
+  const activeTab = projectsModule.getActiveTab();
+  const taskForm = document.getElementById("newTaskForm");
+  const taskTitle = document.getElementById("taskTitle");
+  const taskDescription = document.getElementById("taskDescription");
+  const taskDate = document.getElementById("taskDate");
+  const newTaskDialog = document.getElementById("newForm");
+  e.preventDefault();
+  const activeProject = projectsModule.getProjectByName(activeTab);
+  addTaskToProjectArray(
+    taskTitle.value,
+    taskDate.value,
+    taskDescription.value,
+    getPriorityCheckedValue(),
+    activeProject.list
+  );
+  taskForm.reset();
+  newTaskDialog.close();
+  domControllers.removeAllChildNodes(domControllers.content);
+  domControllers.showProjectView(activeProject.list);
+};
+
+export const addTaskToProjectListHandlers = () => {
+  const submitTask = document.getElementById("submitTaskButton");
+  submitTask.addEventListener("click", onTaskSubmit);
+};
+
+export const showNewTaskForm = () => {
   const newTaskButtons = document.querySelectorAll(".newTaskButton");
   const newTaskDialog = document.getElementById("newForm");
-  const taskForm = document.getElementById("newTaskForm");
+
   newTaskButtons.forEach((button) => {
     button.addEventListener("click", () => {
       newTaskDialog.showModal();
     });
-  });
-
-  const submitTask = document.getElementById("submitTaskButton");
-  const taskTitle = document.getElementById("taskTitle");
-  const taskDescription = document.getElementById("taskDescription");
-  const taskDate = document.getElementById("taskDate");
-
-  submitTask.addEventListener("click", (e) => {
-    e.preventDefault();
-    const iOfActiveTab = findArrayIndex(projectsModule.getActiveTab(), array);
-    addTaskToProjectArray(
-      taskTitle.value,
-      taskDate.value,
-      taskDescription.value,
-      getPriorityCheckedValue(),
-      array[iOfActiveTab].list
-    );
-
-    taskForm.reset();
-    newTaskDialog.close();
-    domControllers.removeAllChildNodes(domControllers.content);
-    domControllers.showProjectView(array[iOfActiveTab].list);
   });
 };
 
@@ -69,13 +79,14 @@ const handlers = (() => {
     const projectSubmitButton = document.getElementById("projectSubmit");
     const projectName = document.getElementById("projectName");
     projectSubmitButton.addEventListener("click", (e) => {
+      e.preventDefault();
+
       const newProjectForm = document.getElementById("newProjectForm");
       projectsModule.makeNewProject(projectName.value);
       domControllers.removeAllChildNodes(domControllers.projectTabContainer);
       domControllers.updateNavTabs();
       newProjectForm.reset();
       projectDialog.close();
-      e.preventDefault();
     });
   }
 
@@ -83,15 +94,15 @@ const handlers = (() => {
     const projectTabs = document.querySelectorAll(".projectTab");
 
     projectTabs.forEach((tab) => {
-      const listOfProjects = projectsModule.getProjects();
+      // const listOfProjects = projectsModule.getProjects();
       tab.addEventListener("click", (e) => {
         domControllers.removeAllChildNodes(domControllers.content);
         const project = projectsModule.getProjectByName(e.target.innerText);
         domControllers.showProjectView(project.list);
         projectsModule.setActiveTab(project.name);
 
-        addDeleteProjectButtonHandlers(project, listOfProjects);
-        addNewTaskEventHandlers(listOfProjects);
+        addDeleteProjectHandlers();
+        addTaskToProjectListHandlers();
       });
     });
   };
