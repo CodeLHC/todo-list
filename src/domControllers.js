@@ -4,6 +4,7 @@ import {
   addDeleteProjectHandlers,
   addTaskToProjectListHandlers,
   showNewTaskForm,
+  deleteTaskHandler,
 } from "./handlers";
 
 const domControllers = (() => {
@@ -25,13 +26,19 @@ const domControllers = (() => {
   const showProjectView = (array) => {
     array.forEach((task) => {
       const newTask = document.createElement("div");
+      newTask.classList.add("newTask");
       newTask.innerText = `${task.title}
       ${task.description}
       ${task.dueDate}
       ${task.priority}`;
       content.appendChild(newTask);
       addTaskToProjectListHandlers();
-      // addDeleteProjectHandlers();
+
+      const deleteTaskButton = document.createElement("button");
+      deleteTaskButton.classList.add("deleteTaskButton");
+      deleteTaskButton.textContent = "🗑️";
+      newTask.appendChild(deleteTaskButton);
+      deleteTaskHandler(task.title);
     });
 
     const addNewTaskButton = document.createElement("button");

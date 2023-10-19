@@ -4,6 +4,7 @@ class Task {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.completed = false;
   }
 
   completesTask() {
@@ -17,20 +18,6 @@ class Task {
   changeDueDate(dueDate) {
     this.dueDate = dueDate;
   }
-
-  //functions
 }
 
 export { Task };
-
-// 	- Title
-// 	- Description
-// 	- dueDate
-// 	- Priority
-// 	- Notes
-// 	- Checklist?
-// What project?
-
-//make new todo
-// set as complete
-//change priority

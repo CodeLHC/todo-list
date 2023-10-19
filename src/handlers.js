@@ -77,6 +77,26 @@ export const showNewTaskForm = () => {
   });
 };
 
+export const deleteTaskHandler = (taskTitle) => {
+  const deleteTaskButtons = document.querySelectorAll(".deleteTaskButton");
+  deleteTaskButtons.forEach((button) => {
+    button.addEventListener("click", (e) => onTaskDelete(taskTitle, e));
+  });
+};
+
+const onTaskDelete = (taskTitle, e) => {
+  e.preventDefault();
+  const listOfProjects = projectsModule.getProjects();
+  const activeTab = projectsModule.getActiveTab();
+  const activeProject = projectsModule.getProjectByName(activeTab);
+  activeProject.removeTask(taskTitle);
+  if (activeTab !== listOfProjects[0].name) {
+    listOfProjects[0].removeTask(taskTitle);
+  }
+  domControllers.removeAllChildNodes(domControllers.content);
+  domControllers.showProjectView(activeProject.list);
+};
+
 const handlers = (() => {
   function addNewProjectButtonHandlers() {
     const projectDialog = document.getElementById("projectDialog");

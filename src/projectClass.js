@@ -10,20 +10,11 @@ class Project {
     this.list.push(task);
   }
 
-  // removeTask(task) {
-  //   const taskToRemove = list.find((t) => t.name === task);
-  //   this.list = this.list.filter((t) => t !== taskToRemove);
-  // }
-
-  //    const removeProject = (name) => {
-  //     const project = listOfProjects.find((p) => p.name === name);
-  //     listOfProjects = listOfProjects.filter((p) => project !== p);
-  //   };
+  removeTask(title) {
+    const taskToRemove = this.list.find((t) => t.title === title);
+    this.list = this.list.filter((t) => t !== taskToRemove);
+    console.log("hi", this.list, title);
+  }
 }
 
 export { Project };
-
-// 	- Name
-// Empty project array to push items to?
-
-// iife function to add project to list of projects to choose from on initialization?
