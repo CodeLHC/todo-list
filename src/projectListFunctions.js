@@ -1,6 +1,4 @@
 import { Project } from "./projectClass";
-import { findArrayIndex } from "./findArrayIndex";
-import { domControllers } from "./domControllers";
 
 const projectsModule = (() => {
   let listOfProjects = [new Project("All my Tasks"), new Project("same")];
@@ -15,6 +13,10 @@ const projectsModule = (() => {
 
   const getActiveTab = () => {
     return activeTab;
+  };
+
+  const getActiveProject = () => {
+    return getProjectByName(activeTab);
   };
 
   const setActiveTab = (tabName) => {
@@ -37,6 +39,7 @@ const projectsModule = (() => {
     setActiveTab,
     getActiveTab,
     getProjectByName,
+    getActiveProject,
   };
 })();
 
