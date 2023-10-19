@@ -71,7 +71,8 @@ export const showNewTaskForm = () => {
   const newTaskDialog = document.getElementById("newForm");
 
   newTaskButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
       newTaskDialog.showModal();
     });
   });
@@ -132,6 +133,7 @@ const handlers = (() => {
 
         addDeleteProjectHandlers();
         addTaskToProjectListHandlers();
+        // deleteTaskHandler(task.title);
       });
     });
   };
