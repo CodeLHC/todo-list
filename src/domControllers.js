@@ -24,6 +24,9 @@ const domControllers = (() => {
   };
 
   const showProjectView = (array) => {
+    const activeTab = projectsModule.getActiveTab();
+    const activeProject = projectsModule.getProjectByName(activeTab);
+    const listOfProjects = projectsModule.getProjects();
     array.forEach((task) => {
       const newTask = document.createElement("div");
       newTask.classList.add("newTask");
@@ -47,11 +50,13 @@ const domControllers = (() => {
     content.appendChild(addNewTaskButton);
     showNewTaskForm();
 
-    const deleteProjectButton = document.createElement("button");
-    deleteProjectButton.classList.add("deleteProjectButton");
-    deleteProjectButton.textContent = "Delete this project";
-    content.appendChild(deleteProjectButton);
-    addDeleteProjectHandlers();
+    if (activeProject !== listOfProjects[0]) {
+      const deleteProjectButton = document.createElement("button");
+      deleteProjectButton.classList.add("deleteProjectButton");
+      deleteProjectButton.textContent = "Delete this project";
+      content.appendChild(deleteProjectButton);
+      addDeleteProjectHandlers();
+    }
   };
 
   const removeAllChildNodes = (parent) => {

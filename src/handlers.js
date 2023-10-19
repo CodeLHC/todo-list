@@ -132,8 +132,8 @@ const handlers = (() => {
         projectsModule.setActiveTab(project.name);
 
         addDeleteProjectHandlers();
+
         addTaskToProjectListHandlers();
-        // deleteTaskHandler(task.title);
       });
     });
   };
