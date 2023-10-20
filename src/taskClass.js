@@ -1,4 +1,3 @@
-import { projectsModule } from "./projectListFunctions";
 class Task {
   constructor(title, description, dueDate, priority, projectName) {
     this.title = title;
@@ -6,25 +5,11 @@ class Task {
     this.dueDate = dueDate;
     this.priority = priority;
     this.completed = false;
-    this.project = projectName;
+    this.projectTags = ["All my Tasks", projectName];
   }
 
   completeOrUncompletesTask() {
-    const listOfProjects = projectsModule.getProjects();
-    const isDefaultProject = this.project === listOfProjects[0].name;
-    if (this.completed === false) {
-      this.completed = true;
-    } else if (this.completed === true) {
-      this.completed = false;
-    }
-    if (!isDefaultProject) {
-      const defaultProject = projectsModule.getProjectByName(
-        listOfProjects[0].name
-      );
-      console.log(defaultProject);
-      const taskToRemoveOnDefault = defaultProject.findTask(this.title);
-      taskToRemoveOnDefault.completeOrUncompletesTask();
-    }
+    this.completed = !this.completed;
   }
 
   changePriority(priority) {

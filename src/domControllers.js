@@ -1,4 +1,4 @@
-import { projectsModule } from "./projectListFunctions";
+import { projectsModule } from "./projectModuleFunctions";
 import {
   handlers,
   addDeleteProjectHandlers,
@@ -7,7 +7,6 @@ import {
   deleteTaskHandler,
   completeTaskHandler,
 } from "./handlers";
-import { findTaskDiv } from "./helperFunctions";
 
 const domControllers = (() => {
   const content = document.getElementById("content");
@@ -73,13 +72,8 @@ function generateProjectTasks(array) {
     newTask.appendChild(checkBoxLabel);
     completeTaskHandler(task.title);
 
-    if (task.completed) {
-      newTask.style.textDecorationLine = "line-through";
-      checkBox.checked = true;
-    } else if (!task.completed) {
-      newTask.style.textDecorationLine = "none";
-      checkBox.checked = false;
-    }
+    newTask.style.textDecorationLine = task.completed ? "line-through" : "none";
+    checkBox.checked = task.completed;
 
     const deleteTaskButton = document.createElement("button");
     deleteTaskButton.classList.add("deleteTaskButton");

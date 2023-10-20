@@ -21,19 +21,19 @@ function resetFormAndDialog(form, dialog) {
   dialog.close();
 }
 
-function findTaskDiv(taskTitle) {
-  const taskDivs = document.querySelectorAll(".newTask");
-  const searchTerm = taskTitle;
-  const neededTaskDiv = [...taskDivs].find((taskDiv) =>
-    taskDiv.textContent.includes(searchTerm)
-  );
-  return neededTaskDiv;
-}
+// function findTaskDiv(taskTitle) {
+//   const taskDivs = document.querySelectorAll(".newTask");
+//   const searchTerm = taskTitle;
+//   const neededTaskDiv = [...taskDivs].find((taskDiv) =>
+//     taskDiv.textContent.includes(searchTerm)
+//   );
+//   return neededTaskDiv;
+// }
 
 export {
   resetFormAndDialog,
   resetProjectView,
   resetNavTabView,
   getPriorityCheckedValue,
-  findTaskDiv,
+  // findTaskDiv,
 };

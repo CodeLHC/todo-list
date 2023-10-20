@@ -1,10 +1,9 @@
-import { projectsModule } from "./projectListFunctions";
+import { projectsModule } from "./projectModuleFunctions";
 import {
   resetProjectView,
   resetNavTabView,
   getPriorityCheckedValue,
   resetFormAndDialog,
-  findTaskDiv,
 } from "./helperFunctions";
 
 const onProjectDelete = () => {
@@ -12,7 +11,8 @@ const onProjectDelete = () => {
   projectsModule.removeProject(activeTab);
   resetNavTabView();
   projectsModule.setActiveTab(projectsModule.getProjects()[0].name);
-  resetProjectView(projectsModule.getActiveProject().list);
+  const activeProject = projectsModule.getActiveProject();
+  resetProjectView(activeProject.getTasks());
 };
 
 const addDeleteProjectHandlers = () => {
@@ -25,8 +25,6 @@ const addDeleteProjectHandlers = () => {
 };
 
 const onTaskSubmit = (e) => {
-  const listOfProjects = projectsModule.getProjects();
-  const activeTab = projectsModule.getActiveTab();
   const taskForm = document.getElementById("newTaskForm");
   const taskTitle = document.getElementById("taskTitle");
   const taskDescription = document.getElementById("taskDescription");
@@ -42,7 +40,7 @@ const onTaskSubmit = (e) => {
   );
 
   resetFormAndDialog(taskForm, newTaskDialog);
-  resetProjectView(activeProject.list);
+  resetProjectView(activeProject.getTasks());
 };
 
 const addTaskToProjectListHandlers = () => {
@@ -71,12 +69,11 @@ const deleteTaskHandler = (taskTitle) => {
 
 const onTaskDelete = (taskTitle, e) => {
   e.preventDefault();
-  const defaultProject = projectsModule.getProjects()[0];
-  const activeTab = projectsModule.getActiveTab();
+
   const activeProject = projectsModule.getActiveProject();
   activeProject.removeTask(taskTitle);
 
-  resetProjectView(activeProject.list);
+  resetProjectView(activeProject.getTasks());
 };
 
 const completeTaskHandler = (taskTitle) => {
@@ -86,16 +83,9 @@ const completeTaskHandler = (taskTitle) => {
 
 const completesTask = (taskTitle) => {
   const activeProject = projectsModule.getActiveProject();
-  const defaultProject = projectsModule.getProjects()[0];
-  const activeTab = projectsModule.getActiveTab();
-  // console.log(defaultProject);
   const clickedOnTask = activeProject.findTask(taskTitle);
   clickedOnTask.completeOrUncompletesTask();
-  // if (activeTab !== defaultProject.name) {
-  //   const sameButDifTask = defaultProject.findTask(taskTitle);
-  //   sameButDifTask.completeOrUncompletesTask();
-  // }
-  resetProjectView(activeProject.list);
+  resetProjectView(activeProject.getTasks());
 };
 
 const handlers = (() => {
@@ -123,7 +113,7 @@ const handlers = (() => {
         const activeProject = projectsModule.getProjectByName(
           e.target.innerText
         );
-        resetProjectView(activeProject.list);
+        resetProjectView(activeProject.getTasks());
         projectsModule.setActiveTab(activeProject.name);
         addDeleteProjectHandlers();
         addTaskToProjectListHandlers();

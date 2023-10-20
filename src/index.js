@@ -1,9 +1,9 @@
 import { domControllers } from "./domControllers";
 import { handlers } from "./handlers";
-import { projectsModule } from "./projectListFunctions";
+import { projectsModule } from "./projectModuleFunctions";
 
 domControllers.updateNavTabs();
 const activeProject = projectsModule.getActiveProject();
-domControllers.showProjectView(activeProject.list);
+domControllers.showProjectView(activeProject.getTasks());
 
 handlers.addNewProjectButtonHandlers();
