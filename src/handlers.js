@@ -4,6 +4,7 @@ import {
   resetNavTabView,
   getPriorityCheckedValue,
   resetFormAndDialog,
+  findTaskDiv,
 } from "./helperFunctions";
 
 const onProjectDelete = () => {
@@ -39,14 +40,7 @@ const onTaskSubmit = (e) => {
     taskDescription.value,
     getPriorityCheckedValue()
   );
-  if (activeTab !== listOfProjects[0].name) {
-    listOfProjects[0].addTask(
-      taskTitle.value,
-      taskDate.value,
-      taskDescription.value,
-      getPriorityCheckedValue()
-    );
-  }
+
   resetFormAndDialog(taskForm, newTaskDialog);
   resetProjectView(activeProject.list);
 };
@@ -81,9 +75,26 @@ const onTaskDelete = (taskTitle, e) => {
   const activeTab = projectsModule.getActiveTab();
   const activeProject = projectsModule.getActiveProject();
   activeProject.removeTask(taskTitle);
-  if (activeTab !== defaultProject.name) {
-    defaultProject.removeTask(taskTitle);
-  }
+
+  resetProjectView(activeProject.list);
+};
+
+const completeTaskHandler = (taskTitle) => {
+  const checkbox = document.getElementById("checkBox");
+  checkbox.addEventListener("click", () => completesTask(taskTitle));
+};
+
+const completesTask = (taskTitle) => {
+  const activeProject = projectsModule.getActiveProject();
+  const defaultProject = projectsModule.getProjects()[0];
+  const activeTab = projectsModule.getActiveTab();
+  // console.log(defaultProject);
+  const clickedOnTask = activeProject.findTask(taskTitle);
+  clickedOnTask.completeOrUncompletesTask();
+  // if (activeTab !== defaultProject.name) {
+  //   const sameButDifTask = defaultProject.findTask(taskTitle);
+  //   sameButDifTask.completeOrUncompletesTask();
+  // }
   resetProjectView(activeProject.list);
 };
 
@@ -128,4 +139,5 @@ export {
   showNewTaskForm,
   addTaskToProjectListHandlers,
   addDeleteProjectHandlers,
+  completeTaskHandler,
 };

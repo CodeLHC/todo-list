@@ -5,7 +5,9 @@ import {
   addTaskToProjectListHandlers,
   showNewTaskForm,
   deleteTaskHandler,
+  completeTaskHandler,
 } from "./handlers";
+import { findTaskDiv } from "./helperFunctions";
 
 const domControllers = (() => {
   const content = document.getElementById("content");
@@ -52,12 +54,32 @@ function generateProjectTasks(array) {
   array.forEach((task) => {
     const newTask = document.createElement("div");
     newTask.classList.add("newTask");
+
     newTask.innerText = `${task.title}
-      ${task.description}
-      ${task.dueDate}
-      ${task.priority}`;
+    ${task.description}
+    ${task.dueDate}
+    ${task.priority}`;
     content.appendChild(newTask);
     addTaskToProjectListHandlers();
+
+    const checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.name = "checkBox";
+    checkBox.value = "value";
+    checkBox.id = "checkBox";
+    const checkBoxLabel = document.createElement("label");
+    checkBoxLabel.htmlFor = "checkBox";
+    newTask.appendChild(checkBox);
+    newTask.appendChild(checkBoxLabel);
+    completeTaskHandler(task.title);
+
+    if (task.completed) {
+      newTask.style.textDecorationLine = "line-through";
+      checkBox.checked = true;
+    } else if (!task.completed) {
+      newTask.style.textDecorationLine = "none";
+      checkBox.checked = false;
+    }
 
     const deleteTaskButton = document.createElement("button");
     deleteTaskButton.classList.add("deleteTaskButton");

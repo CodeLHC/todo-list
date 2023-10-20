@@ -17,8 +17,17 @@ function getPriorityCheckedValue() {
 }
 
 function resetFormAndDialog(form, dialog) {
-  form.close();
+  form.reset();
   dialog.close();
+}
+
+function findTaskDiv(taskTitle) {
+  const taskDivs = document.querySelectorAll(".newTask");
+  const searchTerm = taskTitle;
+  const neededTaskDiv = [...taskDivs].find((taskDiv) =>
+    taskDiv.textContent.includes(searchTerm)
+  );
+  return neededTaskDiv;
 }
 
 export {
@@ -26,4 +35,5 @@ export {
   resetProjectView,
   resetNavTabView,
   getPriorityCheckedValue,
+  findTaskDiv,
 };
