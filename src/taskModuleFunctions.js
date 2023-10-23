@@ -12,7 +12,17 @@ const taskModule = (() => {
     tasks.push(task);
   };
 
-  return { getTasks, removeTasks, addTask };
+  let task;
+
+  const getTask = () => {
+    return task;
+  };
+
+  const setTask = (newTask) => {
+    task = newTask;
+  };
+
+  return { getTasks, removeTasks, addTask, getTask, setTask };
 })();
 
 export { taskModule };

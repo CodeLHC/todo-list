@@ -1,13 +1,14 @@
 import { projectsModule } from "./projectModuleFunctions";
+import { taskModule } from "./taskModuleFunctions";
 import {
   resetProjectView,
   resetNavTabView,
   getPriorityCheckedValue,
   resetFormAndDialog,
   setPriorityCheckedValue,
+  clearAttributesForCreateForm,
+  getTaskAttributesToEditForm,
 } from "./helperFunctions";
-
-import { neededTask } from "./neededTask";
 
 const onProjectDelete = () => {
   const activeTab = projectsModule.getActiveTab();
@@ -39,13 +40,12 @@ const onTaskSubmit = (e) => {
   if (submitTask.value === "Create") {
     activeProject.addTask(
       taskTitle.value,
-      taskDate.value,
       taskDescription.value,
+      taskDate.value,
       getPriorityCheckedValue()
     );
-  }
-  if (submitTask.value === "Edit") {
-    const taskToUpdate = neededTask.getTask();
+  } else if (submitTask.value === "Edit") {
+    const taskToUpdate = taskModule.getTask();
     taskToUpdate.editTask(
       taskTitle.value,
       taskDate.value,
@@ -55,7 +55,7 @@ const onTaskSubmit = (e) => {
   }
   resetFormAndDialog(taskForm, newTaskDialog);
   resetProjectView(activeProject.getTasks());
-  neededTask.setTask(undefined);
+  taskModule.setTask(undefined);
 };
 
 const addTaskToProjectListHandlers = () => {
@@ -72,6 +72,7 @@ const showNewTaskForm = () => {
       const submitTaskButton = document.getElementById("submitTaskButton");
       submitTaskButton.setAttribute("value", "Create");
       e.preventDefault();
+      clearAttributesForCreateForm();
       newTaskDialog.showModal();
     });
   });
@@ -108,29 +109,20 @@ const completesTask = (taskTitle) => {
 const editTaskHandler = (task) => {
   const editTaskButtons = document.querySelectorAll(".editTaskButton");
   editTaskButtons.forEach((button) => {
-    button.addEventListener("click", (e) => editsTask(task, e));
+    button.addEventListener("click", (e) => openEditTaskForm(task, e));
   });
 };
 
-const editsTask = (task, e) => {
-  neededTask.setTask(task);
-  const activeProject = projectsModule.getActiveProject();
-  // const clickedOnTask = activeProject.findTask(title);
+const openEditTaskForm = (task, e) => {
+  taskModule.setTask(task);
   const newTaskDialog = document.getElementById("newForm");
-  const taskTitle = document.getElementById("taskTitle");
-  const taskDescription = document.getElementById("taskDescription");
-  const taskDate = document.getElementById("taskDate");
   const submitTaskButton = document.getElementById("submitTaskButton");
 
   submitTaskButton.setAttribute("value", "Edit");
   newTaskDialog.showModal();
   e.preventDefault();
-  taskTitle.setAttribute("value", task.title);
-  taskDescription.setAttribute("value", task.description);
-  taskDate.setAttribute("value", task.dueDate);
+  getTaskAttributesToEditForm(task);
   setPriorityCheckedValue(task.priority);
-
-  // clickedOnTask.editTask();
 };
 
 const handlers = (() => {

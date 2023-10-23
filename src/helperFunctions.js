@@ -29,14 +29,23 @@ function resetFormAndDialog(form, dialog) {
   dialog.close();
 }
 
-// function findTaskDiv(taskTitle) {
-//   const taskDivs = document.querySelectorAll(".newTask");
-//   const searchTerm = taskTitle;
-//   const neededTaskDiv = [...taskDivs].find((taskDiv) =>
-//     taskDiv.textContent.includes(searchTerm)
-//   );
-//   return neededTaskDiv;
-// }
+function clearAttributesForCreateForm() {
+  const taskTitle = document.getElementById("taskTitle");
+  const taskDescription = document.getElementById("taskDescription");
+  const taskDate = document.getElementById("taskDate");
+  taskTitle.setAttribute("value", "");
+  taskDescription.setAttribute("value", "");
+  taskDate.setAttribute("value", "");
+}
+
+function getTaskAttributesToEditForm(task) {
+  const taskTitle = document.getElementById("taskTitle");
+  const taskDescription = document.getElementById("taskDescription");
+  const taskDate = document.getElementById("taskDate");
+  taskTitle.setAttribute("value", task.title);
+  taskDescription.setAttribute("value", task.description);
+  taskDate.setAttribute("value", task.dueDate);
+}
 
 export {
   resetFormAndDialog,
@@ -44,5 +53,6 @@ export {
   resetNavTabView,
   getPriorityCheckedValue,
   setPriorityCheckedValue,
-  // findTaskDiv,
+  clearAttributesForCreateForm,
+  getTaskAttributesToEditForm,
 };

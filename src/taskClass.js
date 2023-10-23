@@ -12,10 +12,6 @@ class Task {
     this.completed = !this.completed;
   }
 
-  changePriority(priority) {
-    this.priority = priority;
-  }
-
   editTask(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
