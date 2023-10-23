@@ -6,6 +6,7 @@ import {
   showNewTaskForm,
   deleteTaskHandler,
   completeTaskHandler,
+  editTaskHandler,
 } from "./handlers";
 
 const domControllers = (() => {
@@ -59,7 +60,7 @@ function generateProjectTasks(array) {
     ${task.dueDate}
     ${task.priority}`;
     content.appendChild(newTask);
-    addTaskToProjectListHandlers();
+    addTaskToProjectListHandlers(task.title);
 
     const checkBox = document.createElement("input");
     checkBox.type = "checkbox";
@@ -80,6 +81,12 @@ function generateProjectTasks(array) {
     deleteTaskButton.textContent = "🗑️";
     newTask.appendChild(deleteTaskButton);
     deleteTaskHandler(task.title);
+
+    const editTaskButton = document.createElement("button");
+    editTaskButton.classList.add("editTaskButton");
+    editTaskButton.textContent = "✏️";
+    newTask.appendChild(editTaskButton);
+    editTaskHandler(task);
   });
 }
 

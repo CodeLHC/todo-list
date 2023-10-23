@@ -16,6 +16,14 @@ function getPriorityCheckedValue() {
   return checkedValue.value;
 }
 
+function setPriorityCheckedValue(priority) {
+  const taskPriority = document.getElementsByName("taskPriority");
+  const priorityButton = Array.from(taskPriority).find(
+    (radio) => priority === radio.value
+  );
+  priorityButton.setAttribute("checked", true);
+}
+
 function resetFormAndDialog(form, dialog) {
   form.reset();
   dialog.close();
@@ -35,5 +43,6 @@ export {
   resetProjectView,
   resetNavTabView,
   getPriorityCheckedValue,
+  setPriorityCheckedValue,
   // findTaskDiv,
 };

@@ -4,7 +4,10 @@ import {
   resetNavTabView,
   getPriorityCheckedValue,
   resetFormAndDialog,
+  setPriorityCheckedValue,
 } from "./helperFunctions";
+
+import { neededTask } from "./neededTask";
 
 const onProjectDelete = () => {
   const activeTab = projectsModule.getActiveTab();
@@ -30,17 +33,29 @@ const onTaskSubmit = (e) => {
   const taskDescription = document.getElementById("taskDescription");
   const taskDate = document.getElementById("taskDate");
   const newTaskDialog = document.getElementById("newForm");
+  const submitTask = document.getElementById("submitTaskButton");
   const activeProject = projectsModule.getActiveProject();
   e.preventDefault();
-  activeProject.addTask(
-    taskTitle.value,
-    taskDate.value,
-    taskDescription.value,
-    getPriorityCheckedValue()
-  );
-
+  if (submitTask.value === "Create") {
+    activeProject.addTask(
+      taskTitle.value,
+      taskDate.value,
+      taskDescription.value,
+      getPriorityCheckedValue()
+    );
+  }
+  if (submitTask.value === "Edit") {
+    const taskToUpdate = neededTask.getTask();
+    taskToUpdate.editTask(
+      taskTitle.value,
+      taskDate.value,
+      taskDescription.value,
+      getPriorityCheckedValue()
+    );
+  }
   resetFormAndDialog(taskForm, newTaskDialog);
   resetProjectView(activeProject.getTasks());
+  neededTask.setTask(undefined);
 };
 
 const addTaskToProjectListHandlers = () => {
@@ -54,6 +69,8 @@ const showNewTaskForm = () => {
 
   newTaskButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
+      const submitTaskButton = document.getElementById("submitTaskButton");
+      submitTaskButton.setAttribute("value", "Create");
       e.preventDefault();
       newTaskDialog.showModal();
     });
@@ -86,6 +103,34 @@ const completesTask = (taskTitle) => {
   const clickedOnTask = activeProject.findTask(taskTitle);
   clickedOnTask.completeOrUncompletesTask();
   resetProjectView(activeProject.getTasks());
+};
+
+const editTaskHandler = (task) => {
+  const editTaskButtons = document.querySelectorAll(".editTaskButton");
+  editTaskButtons.forEach((button) => {
+    button.addEventListener("click", (e) => editsTask(task, e));
+  });
+};
+
+const editsTask = (task, e) => {
+  neededTask.setTask(task);
+  const activeProject = projectsModule.getActiveProject();
+  // const clickedOnTask = activeProject.findTask(title);
+  const newTaskDialog = document.getElementById("newForm");
+  const taskTitle = document.getElementById("taskTitle");
+  const taskDescription = document.getElementById("taskDescription");
+  const taskDate = document.getElementById("taskDate");
+  const submitTaskButton = document.getElementById("submitTaskButton");
+
+  submitTaskButton.setAttribute("value", "Edit");
+  newTaskDialog.showModal();
+  e.preventDefault();
+  taskTitle.setAttribute("value", task.title);
+  taskDescription.setAttribute("value", task.description);
+  taskDate.setAttribute("value", task.dueDate);
+  setPriorityCheckedValue(task.priority);
+
+  // clickedOnTask.editTask();
 };
 
 const handlers = (() => {
@@ -130,4 +175,5 @@ export {
   addTaskToProjectListHandlers,
   addDeleteProjectHandlers,
   completeTaskHandler,
+  editTaskHandler,
 };

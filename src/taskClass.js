@@ -16,7 +16,7 @@ class Task {
     this.priority = priority;
   }
 
-  editTask() {
+  editTask(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
